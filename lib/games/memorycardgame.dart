@@ -127,7 +127,7 @@ class _MemoryCardGameState extends State<MemoryCardGame> {
                             color: matchedCards.contains(index)
                                 ? CupertinoColors.systemGreen.withOpacity(0.7)
                                 : CupertinoColors.systemGrey5,
-                            borderRadius: BorderRadius.circular(😎,
+                            borderRadius: BorderRadius.circular(10.0), // Fix: Replace emoji with numeric value
                             boxShadow: [
                               BoxShadow(
                                 color: CupertinoColors.black.withOpacity(0.2),
