@@ -46,7 +46,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.offlineminigames"
+        applicationId = "com.omgdev.offlineminigames"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
