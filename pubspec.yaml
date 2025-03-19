@@ -2,7 +2,7 @@ name: offlineminigames
 description: "A new Flutter project for OfflineMiniGames."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: ^3.7.0
