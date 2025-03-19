@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Build & Test
+    name: Build & Sign Android App
     runs-on: ubuntu-latest
 
     steps:
@@ -28,14 +28,31 @@ jobs:
       - name: Run Tests
         run: flutter test
 
-      - name: Build Android APK
-        run: flutter build apk --release
+      # Decode and Save Keystore File from Secret
+      - name: Decode Keystore
+        run: echo "$KEYSTORE_BASE64" | base64 --decode > android/app/keystore.jks
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
 
-      - name: Build Android AppBundle (for Play Store)
-        run: flutter build appbundle
+      # Verify that the keystore file was created successfully
+      - name: Verify Keystore File
+        run: ls -l android/app/keystore.jks
 
-      - name: Upload APK as Artifact
+      # Configure signing properties
+      - name: Setup Signing Properties
+        run: |
+          echo "storeFile=android/app/keystore.jks" > android/app/key.properties
+          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> android/app/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/app/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/app/key.properties
+
+      # Build Signed Android App Bundle (.aab) for Play Store
+      - name: Build Signed AppBundle
+        run: flutter build appbundle --release
+
+      # Upload the AppBundle (.aab) as an Artifact
+      - name: Upload AAB as Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: android-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          name: android-appbundle
+          path: build/app/outputs/bundle/release/app-release.aab
