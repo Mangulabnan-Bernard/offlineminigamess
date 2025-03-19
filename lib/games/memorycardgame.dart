@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'dart:math';
 
 class MemoryCardGame extends StatefulWidget {
   @override
@@ -104,7 +103,6 @@ class _MemoryCardGameState extends State<MemoryCardGame> {
             SizedBox(height: 10),
             Text("Match the pairs! 🃏", style: TextStyle(fontSize: 18)),
             SizedBox(height: 10),
-
             Expanded(
               child: Center(
                 child: Container(
@@ -125,12 +123,12 @@ class _MemoryCardGameState extends State<MemoryCardGame> {
                           height: boxSize,
                           decoration: BoxDecoration(
                             color: matchedCards.contains(index)
-                                ? CupertinoColors.systemGreen.withOpacity(0.7)
+                                ? CupertinoColors.systemGreen.withValues(alpha: 0.7)
                                 : CupertinoColors.systemGrey5,
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(10.0),
                             boxShadow: [
                               BoxShadow(
-                                color: CupertinoColors.black.withOpacity(0.2),
+                                color: CupertinoColors.black.withValues(alpha: 0.2),
                                 blurRadius: 3,
                                 offset: Offset(2, 2),
                               ),
@@ -151,7 +149,6 @@ class _MemoryCardGameState extends State<MemoryCardGame> {
                 ),
               ),
             ),
-
             CupertinoButton.filled(
               child: Text("Restart"),
               onPressed: _resetGame,
