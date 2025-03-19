@@ -31,7 +31,6 @@ jobs:
       # Decode and Save Keystore File from Secret
       - name: Decode Keystore
         run: echo "$KEYSTORE_BASE64" | base64 --decode > android/app/keystore.jks
-
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
 
@@ -42,10 +41,18 @@ jobs:
       # Configure signing properties
       - name: Setup Signing Properties
         run: |
-          echo "storeFile=keystore.jks" > android/app/key.properties
+          echo "storeFile=android/app/keystore.jks" > android/app/key.properties
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> android/app/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/app/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/app/key.properties
+
+      # Debugging: Verify keystore and key.properties
+      - name: Check Keystore and Key Properties
+        run: |
+          echo "Checking keystore.jks..."
+          ls -l android/app/keystore.jks
+          echo "Checking key.properties content..."
+          cat android/app/key.properties
 
       # Build Signed Android App Bundle (.aab) for Play Store
       - name: Build Signed AppBundle
