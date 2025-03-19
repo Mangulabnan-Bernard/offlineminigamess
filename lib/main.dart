@@ -5,7 +5,7 @@ import 'home_screen.dart';
 void main() {
   runApp(CupertinoApp(
     theme: CupertinoThemeData(
-      brightness: Brightness.dark,
+      brightness: Brightness.light, // Use light theme for better alignment with blue colors
     ),
     debugShowCheckedModeBanner: false,
     home: SplashScreen(), // Show SplashScreen first
@@ -34,67 +34,67 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      backgroundColor: CupertinoColors.black, // Dark background
-      child: Stack(
-        children: [
-          // Background Gradient
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFF000000), // Black
-                  Color(0xFF1E1E1E), // Dark Gray
-                  Color(0xFF3B3B3B), // Lighter Gray
-                ],
-              ),
-            ),
+      backgroundColor: CupertinoColors.white, // Base background color
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF0288D1), // Dark blue
+              Color(0xFFB3E5FC), // Light blue
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-
-          // Centered Content
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Logo
-                Image.asset(
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Logo with Glow Effect
+              Container(
+                width: 180,
+                height: 180,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xFF0288D1).withOpacity(0.7), // Blue glow
+                      blurRadius: 20,
+                      spreadRadius: 5,
+                      offset: Offset(0, 0),
+                    ),
+                  ],
+                ),
+                child: Image.asset(
                   'assets/images/lgoo.webp',
-                  width: 150,
-                  height: 150,
+                  width: 180,
+                  height: 180,
                 ),
+              ),
 
-                const SizedBox(height: 20),
+              const SizedBox(height: 30),
 
-                // Futuristic Text
-                Text(
-                  "Welcome to Offline Mini Games",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: CupertinoColors.white,
-                    letterSpacing: 2,
-                    shadows: [
-                      Shadow(
-                        color: CupertinoColors.systemBlue.withOpacity(0.8),
-                        offset: Offset(0, 0),
-                        blurRadius: 10,
-                      ),
-                    ],
-                  ),
+              // Futuristic Text (Shadow Removed)
+              Text(
+                "Offline Mini Games",
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: CupertinoColors.white, // White text for contrast
+                  letterSpacing: 1.5,
                 ),
+              ),
 
-                const SizedBox(height: 20),
+              const SizedBox(height: 30),
 
-                // Loading Indicator
-                CupertinoActivityIndicator(
-                  radius: 15,
-                  color: CupertinoColors.white,
-                ),
-              ],
-            ),
+              // Loading Indicator
+              CupertinoActivityIndicator(
+                radius: 20,
+                color: CupertinoColors.white, // White loading indicator for visibility
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
