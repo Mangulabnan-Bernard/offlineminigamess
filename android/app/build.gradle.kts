@@ -10,7 +10,7 @@ if (keystorePropertiesFile.exists()) {
 android {
     signingConfigs {
         create("release") {
-            storeFile = file(keystoreProperties["storeFile"] ?: "")
+            storeFile = file(rootProject.file("app/keystore.jks"))
             storePassword = keystoreProperties["storePassword"] as String
             keyAlias = keystoreProperties["keyAlias"] as String
             keyPassword = keystoreProperties["keyPassword"] as String
