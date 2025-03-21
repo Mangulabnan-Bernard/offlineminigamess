@@ -15,7 +15,7 @@ android {
             keyAlias = keystoreProperties["keyAlias"]?.toString() ?: ""
             keyPassword = keystoreProperties["keyPassword"]?.toString() ?: ""
         }
-    }
+
 
     buildTypes {
         release {

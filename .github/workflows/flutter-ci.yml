@@ -28,7 +28,7 @@ jobs:
       - name: Run Tests
         run: flutter test
 
-      # Decode and Save Keystore File from Secret
+      # Decode and Save Keystore File from -Secret
       - name: Decode Keystore
         run: echo "$KEYSTORE_BASE64" | base64 --decode > android/app/keystore.jks
         env:
